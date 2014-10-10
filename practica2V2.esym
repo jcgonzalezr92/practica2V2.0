@@ -1,8 +1,8 @@
-C L "MAIN" 0 51 1 "FUNCTION"
-D G "__PCM__" 0 57 ""5.008""
-D G "__DEVICE__" 0 57 "877"
-D G "__DATE__" 0 57 ""10-oct.-14""
-D G "__TIME__" 0 57 ""03:03:50"" "Standard Header file for the PIC16F877A device ////////////////"
+d G "INT_COMP" 2 658 "0x008D40"
+D G "__PCM__" 0 69 ""5.008""
+D G "__DEVICE__" 0 69 "877"
+D G "__DATE__" 0 69 ""10-oct.-14""
+D G "__TIME__" 0 69 ""03:18:22"" "Standard Header file for the PIC16F877A device ////////////////"
 c L "set_tris_a" 2 5 13 "FUNCTION"
 v L "value" 2 28 "int8" `54 
 f B "set_tris_a" 2 28 "void(int8 value)" `53 
@@ -778,9 +778,11 @@ d G "INT_COMP" 2 658 "0x008D40"
 V G "estadoSensor" 0 2 "int1" `623 
 V G "timer" 0 3 "int16" `624 
 V G "segundo" 0 4 "int16" `625 
-F G "interrupcionTimer0" 0 7 "void()" `626 
-F G "interrupcionPuertoB" 0 18 "void()" `627 
-F G "MAIN" 0 37 "void()" `634 
+V G "frec" 0 5 "int1" `626 
+F G "interrupcionTimer0" 0 8 "void()" `627 
+F G "interrupcionPuertoB" 0 20 "void()" `628 
+F G "MAIN" 0 43 "void()" `635 
+C L "MAIN" 0 58 1 "FUNCTION"
 F B "reset_cpu" 0 0
 F B "abs" 1 0
 F B "sleep" 0 0

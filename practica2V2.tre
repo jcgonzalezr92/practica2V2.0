@@ -1,8 +1,8 @@
 ÀÄpractica2V2
-   ÃÄMAIN  0/75  Ram=0
+   ÃÄMAIN  0/83  Ram=0
    ³  ÀÄ@cinit1  (Inline)  Ram=0
-   ÃÄinterrupcionTimer0  0/27  Ram=0
-   ÀÄinterrupcionPuertoB  0/91  Ram=1
+   ÃÄinterrupcionTimer0  0/29  Ram=0
+   ÀÄinterrupcionPuertoB  0/107  Ram=1
       ÃÄ@PSTRINGCN7_9600_62_63  0/86  Ram=5
       ÃÄ@PRINTF_LD_9600_62_63  0/118  Ram=9
       ÃÄ@PSTRINGCN7_9600_62_63  0/86  Ram=5

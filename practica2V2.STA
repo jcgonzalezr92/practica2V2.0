@@ -1,9 +1,9 @@
 
-ROM used:   501/8192 (6%)
-            501/8192 (6%) including unused fragments
+ROM used:   527/8192 (6%)
+            527/8192 (6%) including unused fragments
 
             0.7 Average locations per line
-            14.7 Average locations per statement
+            12.0 Average locations per statement
 
 RAM used:   18/368 (5%) at main() level
             27/368 (7%) worst case
@@ -13,40 +13,40 @@ Stack size: 8
 
 Lines Stmts  %   Files
 ----- ----- ---  -----
-   57    34 100  practica2V2.c
+   68    44 100  practica2V2.c
    13     0   0  practica2V2.h
   661     0   0  ..\..\Program Files (x86)\PICC\Devices\16F877A.h
 ----- -----
-  731    34 Total
+  742    44 Total
 
 Page ROM  %  RAM   Vol Diff  Functions:
 ---- --- --- ---   --- ----  ----------
-0     27   5    0   110  2.9  interrupcionTimer0
-0     91  18    1   287  4.0  interrupcionPuertoB
-0     26   5    0   110  2.9  @const628
-0     86  17    5   262  3.9  @PSTRINGCN7_9600_62_63
-0    118  24    9   258  2.3  @PRINTF_LD_9600_62_63
-0     24   5    0   258  2.3  @const633
-0     75  15    0   258  2.3  MAIN
+0     29   6    0   138  3.4  interrupcionTimer0
+0    107  20    1   391  4.1  interrupcionPuertoB
+0     26   5    0   110  2.9  @const629
+0     86  16    5   262  3.9  @PSTRINGCN7_9600_62_63
+0    118  22    9   258  2.3  @PRINTF_LD_9600_62_63
+0     24   5    0   258  2.3  @const634
+0     83  16    0   362  3.8  MAIN
  Inline         0   258  2.3  @cinit1
 
 Program metrics:
     Functions               8
-    Statements              34
+    Statements              44
     Comments                111
-    Volume (V)              2887
-    Difficulty (D)          23.4
-    Effort to implement (E) 67475
-    Time to implement (T)   1 hours, 2 minutes
+    Volume (V)              3226
+    Difficulty (D)          25.4
+    Effort to implement (E) 81951
+    Time to implement (T)   1 hours, 16 minutes
     Est Delivered Bugs (B)  1
-    Cyclomatic Complexity   8
-    Maintainability (MI)    92
+    Cyclomatic Complexity   9
+    Maintainability (MI)    87
 
  Segment     Used  Free
 -----------  ----  ----
 00000-00003     4  0  
 00004-00035    50  0  
-00036-007FF   447  1547  
+00036-007FF   473  1521  
 00800-00FFF     0  2048  
 01000-017FF     0  2048  
 01800-01FFF     0  2048  

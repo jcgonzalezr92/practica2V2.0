@@ -1,0 +1,5 @@
+--- Info 300 "C:\ProyectosMPLABWindows\practica2V2.0\practica2V2.h" Line 11(1,1): More info:   PWM period: 26,00 us, Frequency: 38,461 kHz, Resolution: 6,70 bits
+>>> Warning 201 "practica2V2.c" Line 59(1,1): Assignment inside relational expression
+      Memory usage:   ROM=6%      RAM=5% - 7%
+      0 Errors,  1 Warnings.
+Build Successful.
