@@ -17,7 +17,21 @@
 027     @TRIS_C
 028.0   estadoSensor
 029-02A timer
-02B     interrupcionPuertoB.@SCRATCH1
+02B-02C segundo
+02D     @PSTRINGCN7_9600_62_63.P1
+02D-02E @PRINTF_LD_9600_62_63.P2
+02D     interrupcionPuertoB.@SCRATCH1
+02E     @PSTRINGCN7_9600_62_63.@SCRATCH1
+02F     @PSTRINGCN7_9600_62_63.@SCRATCH2
+02F     @PRINTF_LD_9600_62_63.@SCRATCH1
+030     @PSTRINGCN7_9600_62_63.@SCRATCH3
+030     @PRINTF_LD_9600_62_63.@SCRATCH2
+031     @PSTRINGCN7_9600_62_63.@SCRATCH4
+031     @PRINTF_LD_9600_62_63.@SCRATCH3
+032     @PRINTF_LD_9600_62_63.@SCRATCH4
+033     @PRINTF_LD_9600_62_63.@SCRATCH5
+034     @PRINTF_LD_9600_62_63.@SCRATCH6
+035     @PRINTF_LD_9600_62_63.@SCRATCH7
 077     @SCRATCH
 078     @SCRATCH
 078     _RETURN_
@@ -62,20 +76,24 @@ FFF     @INTERRUPT_AREA
 
 ROM Allocation:
 000036  interrupcionTimer0
-00004E  interrupcionPuertoB
-000063  MAIN
-000063  @cinit1
-000084  @cinit2
+000051  @PSTRINGCN7_9600_62_63
+0000A7  @PRINTF_LD_9600_62_63
+00011D  interrupcionPuertoB
+000178  @const628.call
+000192  @const633.call
+0001AA  @cinit1
+0001AA  MAIN
+0001D1  @cinit2
 
 Project Directory:
     C:\ProyectosMPLABWindows\practica2V2.0\
 
 Project Files:
-    practica2V2.c                                           [10-oct.-14 01:59  CRC=21F41178]
-    practica2V2.h                                           [10-oct.-14 01:51  CRC=2EB8624F]
+    practica2V2.c                                           [10-oct.-14 03:03  CRC=B5C7779A]
+    practica2V2.h                                           [10-oct.-14 02:57  CRC=14BAFED8]
     ..\..\Program Files (x86)\PICC\Devices\16F877A.h        [03-jul.-13 14:28  CRC=4E65664C]
 
-Source signature=ED77405F
+Source signature=674D430A
 
 Units:
     practica2V2 (main)

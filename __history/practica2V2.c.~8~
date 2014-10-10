@@ -1,7 +1,7 @@
 #include <practica2V2.h>
 short estadoSensor;
 int16 timer=0;
-int16 segundo=0;
+//int16 segundo=0;
 
 #INT_RTCC
 void interrupcionTimer0(){
@@ -9,7 +9,7 @@ void interrupcionTimer0(){
    timer++;
    if (timer==8000){
       output_toggle(PIN_B2);
-      segundo++;
+      //segundo++;
       timer=0;
    }
 }
@@ -19,16 +19,8 @@ void interrupcionPuertoB(){
    estadoSensor=input(PIN_B4);
    if (estadoSensor==0){
       output_high(PIN_B1);
-      if (segundo !=0 ){
-         printf("Duracion en Estado Desbloqueado : %Ld Segundos \n\r " , segundo);
-         segundo=0;
-      } 
    } else{
       output_low(PIN_B1);
-      if (segundo != 0){
-         printf("Duracion en Estado Bloqueado : %Ld Segundos \n\r" , segundo);
-         segundo=0;
-      }
    }
    
 }
@@ -50,7 +42,6 @@ void main()
    while(TRUE)
    {
       //TODO: User Code
-      
    }
 
 }
