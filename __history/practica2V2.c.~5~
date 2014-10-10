@@ -8,7 +8,7 @@ void interrupcionTimer0(){
    set_timer0(131);
    timer++;
    if (timer==8000){
-      output_toggle(PIN_B2);
+      output_toggle(PIN_B3);
       //segundo++;
       timer=0;
    }
@@ -36,7 +36,6 @@ void main()
    ENABLE_INTERRUPTS(INT_RB);
    ENABLE_INTERRUPTS(INT_RTCC);
    ENABLE_INTERRUPTS(GLOBAL);
-   setup_timer_0(RTCC_INTERNAL | RTCC_DIV_1);
    set_timer0(131);
    
    while(TRUE)

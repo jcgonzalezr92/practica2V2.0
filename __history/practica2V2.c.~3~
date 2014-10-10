@@ -1,16 +1,14 @@
 #include <practica2V2.h>
 short estadoSensor;
 int16 timer=0;
-//int16 segundo=0;
-
+int16 segundo=0;
 #INT_RTCC
 void interrupcionTimer0(){
    set_timer0(131);
    timer++;
    if (timer==8000){
-      output_toggle(PIN_B2);
-      //segundo++;
-      timer=0;
+      output_toggle(PIN_B3);
+      segundo++;
    }
 }
 
@@ -36,7 +34,6 @@ void main()
    ENABLE_INTERRUPTS(INT_RB);
    ENABLE_INTERRUPTS(INT_RTCC);
    ENABLE_INTERRUPTS(GLOBAL);
-   setup_timer_0(RTCC_INTERNAL | RTCC_DIV_1);
    set_timer0(131);
    
    while(TRUE)

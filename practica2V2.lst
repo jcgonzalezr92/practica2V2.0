@@ -1,18 +1,18 @@
-CCS PCM C Compiler, Version 5.008, 62930               10-oct.-14 01:20
+CCS PCM C Compiler, Version 5.008, 62930               10-oct.-14 01:59
 
                Filename:   C:\ProyectosMPLABWindows\practica2V2.0\practica2V2.lst
 
-               ROM used:   126 words (2%)
+               ROM used:   168 words (2%)
                            Largest free fragment is 2048
-               RAM used:   14 (4%) at main() level
-                           15 (4%) worst case
+               RAM used:   16 (4%) at main() level
+                           17 (5%) worst case
                Stack used: 1 locations (0 in main + 1 for interrupts)
                Stack size: 8
 
 *
 0000:  MOVLW  00
 0001:  MOVWF  0A
-0002:  GOTO   044
+0002:  GOTO   063
 0003:  NOP
 0004:  MOVWF  7F
 0005:  SWAPF  03,W
@@ -33,30 +33,37 @@ CCS PCM C Compiler, Version 5.008, 62930               10-oct.-14 01:20
 0014:  MOVWF  26
 0015:  BCF    03.7
 0016:  BCF    03.5
-0017:  BTFSS  0B.3
+0017:  BTFSS  0B.5
 0018:  GOTO   01B
-0019:  BTFSC  0B.0
-001A:  GOTO   02C
-001B:  MOVF   22,W
-001C:  MOVWF  04
-001D:  MOVF   23,W
-001E:  MOVWF  77
-001F:  MOVF   24,W
-0020:  MOVWF  78
-0021:  MOVF   25,W
-0022:  MOVWF  79
-0023:  MOVF   26,W
-0024:  MOVWF  7A
-0025:  MOVF   20,W
-0026:  MOVWF  0A
-0027:  SWAPF  21,W
-0028:  MOVWF  03
-0029:  SWAPF  7F,F
-002A:  SWAPF  7F,W
-002B:  RETFIE
-002C:  BCF    0A.3
-002D:  BCF    0A.4
-002E:  GOTO   02F
+0019:  BTFSC  0B.2
+001A:  GOTO   030
+001B:  BTFSS  0B.3
+001C:  GOTO   01F
+001D:  BTFSC  0B.0
+001E:  GOTO   033
+001F:  MOVF   22,W
+0020:  MOVWF  04
+0021:  MOVF   23,W
+0022:  MOVWF  77
+0023:  MOVF   24,W
+0024:  MOVWF  78
+0025:  MOVF   25,W
+0026:  MOVWF  79
+0027:  MOVF   26,W
+0028:  MOVWF  7A
+0029:  MOVF   20,W
+002A:  MOVWF  0A
+002B:  SWAPF  21,W
+002C:  MOVWF  03
+002D:  SWAPF  7F,F
+002E:  SWAPF  7F,W
+002F:  RETFIE
+0030:  BCF    0A.3
+0031:  BCF    0A.4
+0032:  GOTO   036
+0033:  BCF    0A.3
+0034:  BCF    0A.4
+0035:  GOTO   04E
 .................... #include <practica2V2.h> 
 .................... #include <16F877A.h> 
 .................... //////// Standard Header file for the PIC16F877A device //////////////// 
@@ -64,7 +71,7 @@ CCS PCM C Compiler, Version 5.008, 62930               10-oct.-14 01:20
 ....................  
 .................... #list 
 ....................  
-.................... #device ADC=10 
+.................... #device ADC=16 
 ....................  
 .................... #FUSES NOWDT                    //No Watch Dog Timer 
 .................... #FUSES NOBROWNOUT               //No brownout reset 
@@ -77,112 +84,165 @@ CCS PCM C Compiler, Version 5.008, 62930               10-oct.-14 01:20
 ....................  
 ....................  
 .................... short estadoSensor; 
+.................... int16 timer=0; 
+.................... //int16 segundo=0; 
+....................  
+.................... #INT_RTCC 
+.................... void interrupcionTimer0(){ 
+....................    set_timer0(131); 
+0036:  MOVLW  83
+0037:  MOVWF  01
+....................    timer++; 
+0038:  INCF   29,F
+0039:  BTFSC  03.2
+003A:  INCF   2A,F
+....................    if (timer==8000){ 
+003B:  MOVF   29,W
+003C:  SUBLW  40
+003D:  BTFSS  03.2
+003E:  GOTO   04A
+003F:  MOVF   2A,W
+0040:  SUBLW  1F
+0041:  BTFSS  03.2
+0042:  GOTO   04A
+....................       output_toggle(PIN_B2); 
+0043:  BSF    03.5
+0044:  BCF    06.2
+0045:  MOVLW  04
+0046:  BCF    03.5
+0047:  XORWF  06,F
+....................       //segundo++; 
+....................       timer=0; 
+0048:  CLRF   2A
+0049:  CLRF   29
+....................    } 
+.................... } 
+....................  
+004A:  BCF    0B.2
+004B:  BCF    0A.3
+004C:  BCF    0A.4
+004D:  GOTO   01F
 .................... #INT_RB 
 .................... void interrupcionPuertoB(){ 
 ....................    estadoSensor=input(PIN_B4); 
-002F:  BSF    03.5
-0030:  BSF    06.4
-0031:  BCF    03.5
-0032:  BCF    28.0
-0033:  BTFSC  06.4
-0034:  BSF    28.0
+004E:  BSF    03.5
+004F:  BSF    06.4
+0050:  BCF    03.5
+0051:  BCF    28.0
+0052:  BTFSC  06.4
+0053:  BSF    28.0
 ....................    if (estadoSensor==0){ 
-0035:  BTFSC  28.0
-0036:  GOTO   03C
+0054:  BTFSC  28.0
+0055:  GOTO   05B
 ....................       output_high(PIN_B1); 
-0037:  BSF    03.5
-0038:  BCF    06.1
-0039:  BCF    03.5
-003A:  BSF    06.1
+0056:  BSF    03.5
+0057:  BCF    06.1
+0058:  BCF    03.5
+0059:  BSF    06.1
 ....................    } else{ 
-003B:  GOTO   040
+005A:  GOTO   05F
 ....................       output_low(PIN_B1); 
-003C:  BSF    03.5
-003D:  BCF    06.1
-003E:  BCF    03.5
-003F:  BCF    06.1
+005B:  BSF    03.5
+005C:  BCF    06.1
+005D:  BCF    03.5
+005E:  BCF    06.1
 ....................    } 
 ....................     
-0040:  BCF    0B.0
-0041:  BCF    0A.3
-0042:  BCF    0A.4
-0043:  GOTO   01B
+005F:  BCF    0B.0
+0060:  BCF    0A.3
+0061:  BCF    0A.4
+0062:  GOTO   01F
 .................... } 
 ....................  
 .................... void main() 
-0044:  MOVF   03,W
-0045:  ANDLW  1F
-0046:  MOVWF  03
-0047:  BSF    03.5
-0048:  BCF    05.0
-0049:  BCF    03.5
-004A:  BSF    05.0
-004B:  MOVLW  FF
-004C:  MOVWF  27
-004D:  MOVLW  19
-004E:  BSF    03.5
-004F:  MOVWF  12
-0050:  MOVLW  04
-0051:  BCF    03.5
-0052:  MOVWF  12
-0053:  BCF    27.2
-0054:  MOVF   27,W
-0055:  BSF    03.5
-0056:  MOVWF  07
-0057:  MOVLW  0C
-0058:  BCF    03.5
-0059:  MOVWF  15
-005A:  MOVLW  3C
-005B:  MOVWF  17
-005C:  BSF    03.5
-005D:  BSF    1F.0
-005E:  BSF    1F.1
-005F:  BSF    1F.2
-0060:  BCF    1F.3
-0061:  MOVLW  07
-0062:  MOVWF  1C
-0063:  BCF    03.7
+0063:  MOVF   03,W
+0064:  ANDLW  1F
+0065:  MOVWF  03
+0066:  BSF    03.5
+0067:  BCF    05.0
+0068:  BCF    03.5
+0069:  BSF    05.0
+006A:  MOVLW  FF
+006B:  MOVWF  27
+006C:  MOVLW  19
+006D:  BSF    03.5
+006E:  MOVWF  12
+006F:  MOVLW  04
+0070:  BCF    03.5
+0071:  MOVWF  12
+0072:  BCF    27.2
+0073:  MOVF   27,W
+0074:  BSF    03.5
+0075:  MOVWF  07
+0076:  MOVLW  0C
+0077:  BCF    03.5
+0078:  MOVWF  15
+0079:  MOVLW  3C
+007A:  MOVWF  17
+007B:  CLRF   2A
+007C:  CLRF   29
+007D:  BSF    03.5
+007E:  BSF    1F.0
+007F:  BSF    1F.1
+0080:  BSF    1F.2
+0081:  BCF    1F.3
+0082:  MOVLW  07
+0083:  MOVWF  1C
+0084:  BCF    03.7
 .................... { 
 ....................    set_tris_a(0x01); 
-0064:  MOVLW  01
-0065:  MOVWF  05
+0085:  MOVLW  01
+0086:  MOVWF  05
 ....................    set_tris_b(0x10); 
-0066:  MOVLW  10
-0067:  MOVWF  06
+0087:  MOVLW  10
+0088:  MOVWF  06
 ....................    set_tris_c(0x00); 
-0068:  MOVLW  00
-0069:  MOVWF  07
-006A:  BCF    03.5
-006B:  MOVWF  27
+0089:  MOVLW  00
+008A:  MOVWF  07
+008B:  BCF    03.5
+008C:  MOVWF  27
 ....................    output_a(0x00); 
-006C:  BSF    03.5
-006D:  CLRF   05
-006E:  BCF    03.5
-006F:  CLRF   05
+008D:  BSF    03.5
+008E:  CLRF   05
+008F:  BCF    03.5
+0090:  CLRF   05
 ....................    output_b(0x00); 
-0070:  BSF    03.5
-0071:  CLRF   06
-0072:  BCF    03.5
-0073:  CLRF   06
+0091:  BSF    03.5
+0092:  CLRF   06
+0093:  BCF    03.5
+0094:  CLRF   06
 ....................    output_c(0x00); 
-0074:  MOVWF  27
-0075:  BSF    03.5
-0076:  CLRF   07
-0077:  BCF    03.5
-0078:  CLRF   07
+0095:  MOVWF  27
+0096:  BSF    03.5
+0097:  CLRF   07
+0098:  BCF    03.5
+0099:  CLRF   07
 ....................    ENABLE_INTERRUPTS(INT_RB); 
-0079:  BSF    0B.3
+009A:  BSF    0B.3
+....................    ENABLE_INTERRUPTS(INT_RTCC); 
+009B:  BSF    0B.5
 ....................    ENABLE_INTERRUPTS(GLOBAL); 
-007A:  MOVLW  C0
-007B:  IORWF  0B,F
+009C:  MOVLW  C0
+009D:  IORWF  0B,F
+....................    setup_timer_0(RTCC_INTERNAL | RTCC_DIV_1); 
+009E:  BSF    03.5
+009F:  MOVF   01,W
+00A0:  ANDLW  C7
+00A1:  IORLW  08
+00A2:  MOVWF  01
+....................    set_timer0(131); 
+00A3:  MOVLW  83
+00A4:  BCF    03.5
+00A5:  MOVWF  01
+....................     
 ....................    while(TRUE) 
 ....................    { 
-007C:  GOTO   07C
+00A6:  GOTO   0A6
 ....................       //TODO: User Code 
 ....................    } 
 ....................  
 .................... } 
-007D:  SLEEP
+00A7:  SLEEP
 
 Configuration Fuses:
    Word  1: 3F31   XT NOWDT PUT NOBROWNOUT NOLVP NOCPD NOWRT NODEBUG NOPROTECT

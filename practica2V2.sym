@@ -16,7 +16,8 @@
 026     @INTERRUPT_AREA
 027     @TRIS_C
 028.0   estadoSensor
-029     interrupcionPuertoB.@SCRATCH1
+029-02A timer
+02B     interrupcionPuertoB.@SCRATCH1
 077     @SCRATCH
 078     @SCRATCH
 078     _RETURN_
@@ -60,20 +61,21 @@ F7F     @INTERRUPT_AREA
 FFF     @INTERRUPT_AREA
 
 ROM Allocation:
-00002F  interrupcionPuertoB
-000044  MAIN
-000044  @cinit1
-000063  @cinit2
+000036  interrupcionTimer0
+00004E  interrupcionPuertoB
+000063  MAIN
+000063  @cinit1
+000084  @cinit2
 
 Project Directory:
     C:\ProyectosMPLABWindows\practica2V2.0\
 
 Project Files:
-    practica2V2.c                                           [10-oct.-14 01:19  CRC=CC0ECD91]
-    practica2V2.h                                           [10-oct.-14 01:20  CRC=2EB8624F]
+    practica2V2.c                                           [10-oct.-14 01:59  CRC=21F41178]
+    practica2V2.h                                           [10-oct.-14 01:51  CRC=2EB8624F]
     ..\..\Program Files (x86)\PICC\Devices\16F877A.h        [03-jul.-13 14:28  CRC=4E65664C]
 
-Source signature=9791FC78
+Source signature=ED77405F
 
 Units:
     practica2V2 (main)
@@ -81,7 +83,7 @@ Units:
 Compiler Settings:
     Processor:      PIC16F877A
     Pointer Size:   16
-    ADC Range:      0-1023
+    ADC Range:      0-65535
     Opt Level:      9
     Short,Int,Long: UNSIGNED: 1,8,16
     Float,Double:   32,32
